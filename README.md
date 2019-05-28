@@ -16,12 +16,19 @@ terraform apply "plan.tfplan"
 
 ### Create Filesystem
 
-SSH into the EC2 instance and run the following commands to create the file system on the empty EBS
+1. Install xfsprogs
 
-```
-sudo yum install xfsprogs
-sudo mkfs -t xfs /dev/xvdh
-```
+    `sudo yum install xfsprogs`
+
+2. SSH into the EC2 instance and run the following commands to create the file system on the empty EBS
+
+    `sudo mkfs -t xfs /dev/xvdh`
+
+3. Mount the EBS drive to the Apache document directory (do this after apache is installed)
+
+    `sudo mount /dev/xvdh /var/www/html`
+
+4. Ensure drive is mounted upon boot. Follow directions here. https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
 
 ### Install and Setup Apache
 
@@ -29,11 +36,7 @@ sudo mkfs -t xfs /dev/xvdh
 
     `sudo yum -y install httpd`
 
-2. Mount the EBS drive to the Apache document directory
-
-    `sudo mount /dev/xvdh /var/www/html`
-
-3. Change owner of the html directory
+2. Change owner of the html directory
 
     `sudo chown -R ec2-user /var/www/html`
 
@@ -53,15 +56,19 @@ sudo mkfs -t xfs /dev/xvdh
 
     `http://<public-dns-hostname>`
 
-6. Copy screen shots to server
+6. Take screen shots to server
 
-    Take screen shot of EBS mount volume
+    Upload screen shot of EBS mount volume
 
     `scp -i mykeypair.pem html/screen-shot1.png ec2-user@<public-dns-hostname>:/var/www/html`
 
-    Take screen shot of index.html residing in the EBS
+    Upload screen shot of index.html residing in the EBS volume
 
     `scp -i mykeypair.pem html/screen-shot2.png ec2-user@<public-dns-hostname>:/var/www/html`
+
+7. Auto start Apache
+
+    `sudo chkconfig httpd on`
 
 # Resources
 
