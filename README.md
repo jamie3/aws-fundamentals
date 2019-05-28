@@ -56,19 +56,19 @@ terraform apply "plan.tfplan"
 
     `http://<public-dns-hostname>`
 
-6. Take screen shots to server
-
-    Upload screen shot of EBS mount volume
+6. Upload screen shot of EBS mount volume
 
     `scp -i mykeypair.pem html/screen-shot1.png ec2-user@<public-dns-hostname>:/var/www/html`
 
-    Upload screen shot of index.html residing in the EBS volume
+7. Upload screen shot of index.html residing in the EBS volume
 
     `scp -i mykeypair.pem html/screen-shot2.png ec2-user@<public-dns-hostname>:/var/www/html`
 
-7. Auto start Apache
+8. Auto start Apache
 
     `sudo chkconfig httpd on`
+
+9. Verify that
 
 # Resources
 
