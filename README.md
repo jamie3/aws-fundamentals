@@ -1,6 +1,6 @@
 # AWS Fundamentals
 
-Deploys an EC2 instance with a web server inside its own VPC
+Deploys an EC2 instance with an Apache web server inside its own VPC and exposes it over an EIP.
 
 ## Create Infrastructure
 
