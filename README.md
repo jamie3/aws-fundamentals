@@ -23,34 +23,45 @@ sudo yum install xfsprogs
 sudo mkfs -t xfs /dev/xvdh
 ```
 
-Mount the drive
-
-```
-sudo mkdir /web
-sudo mount /dev/xvdh /web
-```
-
 ### Install and Setup Apache
 
-`sudo yum -y install httpd`
+1. Install Apache
 
-Edit the file `sudo vi /etc/httpd/conf/httpd.conf`
-Replace `DocumentRoot "/var/www/html"` with `DocumentRoot "/web"`
+    `sudo yum -y install httpd`
 
-Start Apache
+2. Mount the EBS drive to the Apache document directory
 
-`sudo service httpd start`
+    `sudo mount /dev/xvdh /var/www/html`
 
-### Create Web Page
+3. Change owner of the html directory
 
-```
-touch /web/index.html
-chmod
-```
+    `sudo chown -R ec2-user /var/www/html`
 
-# Web Server
+3. Create the Web Page
 
-`http://<public-dns-hostname>/index.html`
+    `sudo touch /var/www/index.html`
+
+    Copy the content from the `html/index.html` file into the `index.html` on the server
+
+    `scp -i mykeypair.pem html/index.html ec2-user@<public-dns-hostname>:/var/www/html`
+
+4. Start Apache
+
+    `sudo service httpd start`
+
+5. Open the web page
+
+    `http://<public-dns-hostname>`
+
+6. Copy screen shots to server
+
+    Take screen shot of EBS mount volume
+
+    `scp -i mykeypair.pem html/screen-shot1.png ec2-user@<public-dns-hostname>:/var/www/html`
+
+    Take screen shot of index.html residing in the EBS
+
+    `scp -i mykeypair.pem html/screen-shot2.png ec2-user@<public-dns-hostname>:/var/www/html`
 
 # Resources
 
