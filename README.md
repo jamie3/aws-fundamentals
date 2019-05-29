@@ -70,9 +70,9 @@ terraform apply "plan.tfplan"
 
 9. Verify that the resources on the web server are available
 
-    - http://<public-dns-hostname>
-    - http://<public-dns-hostname>/screen-shot1.png
-    - http://<public-dns-hostname>/screen-shot2.png
+    - http://public-dns-hostname
+    - http://public-dns-hostname/screen-shot1.png
+    - http://public-dns-hostname/screen-shot2.png
 
 # Resources
 
